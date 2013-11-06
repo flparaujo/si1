@@ -91,5 +91,38 @@ public class NumeroPorExtensoTest {
 		Assert.assertEquals("oitenta e oito", NumeroPorExtenso.versaoEmPortugues("88"));
 		Assert.assertEquals("noventa e nove", NumeroPorExtenso.versaoEmPortugues("99"));
 	}
+	
+	@Test
+	public void testaNumerosNaCasaDasCentenas() throws Exception {
+		Assert.assertEquals("cento e vinte e um", NumeroPorExtenso.versaoEmPortugues("121"));
+		Assert.assertEquals("cento e onze", NumeroPorExtenso.versaoEmPortugues("111"));
+		Assert.assertEquals("cento e seis", NumeroPorExtenso.versaoEmPortugues("106"));
+		Assert.assertEquals("trezentos e oito", NumeroPorExtenso.versaoEmPortugues("308"));
+		Assert.assertEquals("quinhentos e quarenta", NumeroPorExtenso.versaoEmPortugues("540"));
+		Assert.assertEquals("setecentos e trinta e sete", NumeroPorExtenso.versaoEmPortugues("737"));
+		Assert.assertEquals("novecentos e noventa e nove", NumeroPorExtenso.versaoEmPortugues("999"));
+	}
+	
+	@Test
+	public void testaNumerosNaCasaDeMil() throws Exception {
+		Assert.assertEquals("mil", NumeroPorExtenso.versaoEmPortugues("1000"));
+		Assert.assertEquals("mil e quatrocentos", NumeroPorExtenso.versaoEmPortugues("1400"));
+		Assert.assertEquals("mil e oito", NumeroPorExtenso.versaoEmPortugues("1008"));
+		Assert.assertEquals("mil cento e oito", NumeroPorExtenso.versaoEmPortugues("1108"));
+		Assert.assertEquals("mil cento e dezoito", NumeroPorExtenso.versaoEmPortugues("1118"));
+		Assert.assertEquals("mil quatrocentos e cinquenta e oito", NumeroPorExtenso.versaoEmPortugues("1458"));
+		Assert.assertEquals("dois mil e um", NumeroPorExtenso.versaoEmPortugues("2001"));
+		Assert.assertEquals("três mil e trezentos", NumeroPorExtenso.versaoEmPortugues("3300"));
+		Assert.assertEquals("catorze mil e trezentos", NumeroPorExtenso.versaoEmPortugues("14300"));
+		Assert.assertEquals("quarenta mil", NumeroPorExtenso.versaoEmPortugues("40000"));
+		Assert.assertEquals("quarenta e três mil e doze", NumeroPorExtenso.versaoEmPortugues("43012"));
+		Assert.assertEquals("cem mil", NumeroPorExtenso.versaoEmPortugues("100000"));
+		Assert.assertEquals("duzentos e um mil", NumeroPorExtenso.versaoEmPortugues("201000"));
+		Assert.assertEquals("trezentos e três mil trezentos e três", NumeroPorExtenso.versaoEmPortugues(
+				"303303"));
+		Assert.assertEquals("cem mil cento e nove", NumeroPorExtenso.versaoEmPortugues("100109"));
+		Assert.assertEquals("novecentos e oitenta e sete mil setecentos e oitenta", 
+				NumeroPorExtenso.versaoEmPortugues("987780"));
+	}
 
 }
