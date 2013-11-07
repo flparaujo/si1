@@ -2,7 +2,7 @@ package codigo;
 
 public class NumeroPorExtenso {
 	
-	private static String[] unidades = {"zero", "um", "dois", "tr�s", "quatro", "cinco", "seis", "sete",
+	private static String[] unidades = {"zero", "um", "dois", "tr�s", "quatro", "cinco", "seis", "sete",
 		"oito", "nove"};
 	
 	private static String[] dezenas = {"dez", "onze", "doze", "treze", "catorze", "quinze", "dezesseis",
@@ -58,6 +58,22 @@ public class NumeroPorExtenso {
 			centenaPorExtenso(numero/1000) + " mil " + centenaPorExtenso(numero%1000);
 	}
 	
+	public static String milhoesPorExtenso(int numero) {
+		if(numero/1000000 < 1) {
+			return milharPorExtenso(numero);
+		}
+		else if(numero % 1000000 == 0) {
+			return centenaPorExtenso(numero/1000000).equals("um") ? "um milhão" : centenaPorExtenso(numero/1000000) 
+					+ " milhões";
+		}
+		else if(numero % 100 == 0 || ((numero % 1000)/100) == 0) {
+			return centenaPorExtenso(numero/1000).equals("um") ? "mil e " + centenaPorExtenso(numero%1000) : 
+				centenaPorExtenso(numero/1000) + " mil e " + centenaPorExtenso(numero%1000);
+		}
+		return centenaPorExtenso(numero/1000).equals("um") ? "mil " + centenaPorExtenso(numero%1000) : 
+			centenaPorExtenso(numero/1000) + " mil " + centenaPorExtenso(numero%1000);
+	}
+	
 	public static boolean ehUmNumeroNatural(String numero) {
 		for(char caractere : numero.toCharArray()) {
 			if(caractere < '0' || caractere > '9') {
@@ -75,7 +91,7 @@ public class NumeroPorExtenso {
 		if (numeroInteiro == 0) {
 			return "zero";
 		}
-		return milharPorExtenso(numeroInteiro);
+		return milhoesPorExtenso(numeroInteiro);
 	}
 
 }
