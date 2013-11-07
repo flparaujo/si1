@@ -123,6 +123,8 @@ public class NumeroPorExtensoTest {
 		Assert.assertEquals("cem mil cento e nove", NumeroPorExtenso.versaoEmPortugues("100109"));
 		Assert.assertEquals("novecentos e oitenta e sete mil setecentos e oitenta", 
 				NumeroPorExtenso.versaoEmPortugues("987780"));
+		Assert.assertEquals("quinhentos mil e dois", 
+				NumeroPorExtenso.versaoEmPortugues("500002"));
 	}
 
 }
