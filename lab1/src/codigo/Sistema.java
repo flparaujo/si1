@@ -1,9 +1,27 @@
 package codigo;
 
+import java.util.*;
+
 public class Sistema {
 	
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		String numero;
 		
+		while (true) {
+			System.out.println("Informe um numero: ");
+			numero = input.nextLine();
+			try {
+				System.out.println("> " + NumeroPorExtenso.versaoEmPortugues(numero));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			if(NumeroPorExtenso.ehUmNumeroNatural(numero)) {
+				break;
+			}
+		}
+		
+		input.close();
 	}
 
 }
