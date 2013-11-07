@@ -126,5 +126,10 @@ public class NumeroPorExtensoTest {
 		Assert.assertEquals("quinhentos mil e dois", 
 				NumeroPorExtenso.versaoEmPortugues("500002"));
 	}
-
+	
+	@Test
+	public void testaNumerosNaCasaDosMilhoes() throws Exception {
+		Assert.assertEquals("um milhão", NumeroPorExtenso.versaoEmPortugues("1000000"));
+		Assert.assertEquals("vinte e um milhões", NumeroPorExtenso.versaoEmPortugues("21000000"));
+	}
 }
