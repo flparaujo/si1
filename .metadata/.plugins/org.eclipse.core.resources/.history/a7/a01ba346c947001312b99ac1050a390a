@@ -1,0 +1,27 @@
+package codigo;
+
+import java.util.*;
+
+public class Sistema {
+	
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		String numero;
+		
+		System.out.println("Informe um numero: ");
+		numero = input.next();
+		
+		while (numero.equals("")) {
+			try {
+				System.out.println("> " + NumeroPorExtenso.versaoEmPortugues(numero));
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			System.out.println("Informe um numero: ");
+			numero = input.next();
+		}
+		
+		input.close();
+	}
+
+}

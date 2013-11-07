@@ -1,0 +1,11 @@
+package codigo;
+
+import java.util.*;
+
+public class Sistema {
+	
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+	}
+
+}
