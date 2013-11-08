@@ -5,23 +5,26 @@ import java.util.*;
 public class Sistema {
 	
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
-		String numero;
+		int numero;
 		
-		while (true) {
-			System.out.println("Informe um numero: ");
-			numero = input.nextLine();
-			try {
-				System.out.println("> " + NumeroPorExtenso.versaoEmPortugues(numero));
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-			if(NumeroPorExtenso.ehUmNumeroNatural(numero)) {
-				break;
-			}
+		numero = recebeValor(new Scanner(System.in), "Informe um numero: ");
+		try {
+			System.out.println("> " + NumeroPorExtenso.versaoEmPortugues(numero));
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
-		
-		input.close();
+	}
+	
+	private static int recebeValor(Scanner entrada, String prompt) {
+		String valor = "";
+		while(! valor.matches("\\d{1,10}")) {
+			if(! valor.equals("")) {
+				System.out.println(valor + " nao e um numero natural menor ou igual a 1000000000!");
+			}
+			System.out.println(prompt);
+			valor = entrada.nextLine();
+		}
+		return Integer.parseInt(valor);
 	}
 
 }
