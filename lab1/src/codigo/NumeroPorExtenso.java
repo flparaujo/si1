@@ -2,21 +2,36 @@ package codigo;
 
 public class NumeroPorExtenso {
 	
-	private static String[] unidades = {"zero", "um", "dois", "trï¿½s", "quatro", "cinco", "seis", "sete",
+	private static String[] unidades = {"zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete",
 		"oito", "nove"};
 	
 	private static String[] dezenas = {"dez", "onze", "doze", "treze", "catorze", "quinze", "dezesseis",
-		"dezessete", "dezoito", "dezenove", "vinte", "trinta", "quarenta", "cinquenta", "sessenta",
+		"dezessete", "dezoito", "dezenove"};
+	
+	private static String[] dezenasAcimaDeDez = {"vinte", "trinta", "quarenta", "cinquenta", "sessenta",
 		"setenta", "oitenta", "noventa"};
 	
 	private static String[] centenas = {"cem", "duzentos", "trezentos", "quatrocentos", "quinhentos",
 		"seicentos", "setecentos", "oitocentos", "novecentos"};
 	
-	public static String unidadePorExtenso(int numero) {
+	public static String versaoEmPortugues(int numero) throws Exception {
+		if (numero < 0) {
+			throw new Exception("O numero nao pode ser negativo!");
+		}
+		else if (numero == 0) {
+			return "zero";
+		}
+		else if(numero == 1000000000) {
+			return "um bilhão";
+		}
+		return milhoesPorExtenso(numero);
+	}
+	
+	private static String unidadePorExtenso(int numero) {
 		return unidades[numero];
 	}
 	
-	public static String dezenaPorExtenso(int numero) {
+	private static String dezenaPorExtenso(int numero) {
 		if(numero < 10) {
 			return unidades[numero%10];
 		}
@@ -24,12 +39,12 @@ public class NumeroPorExtenso {
 			return dezenas[numero%10];
 		}
 		else if(numero % 10 == 0) {
-			return dezenas[8+(numero/10)];
+			return dezenasAcimaDeDez[numero/10-2];
 		}
-		return dezenas[8+(numero/10)] + " e " + unidadePorExtenso(numero%10);
+		return dezenasAcimaDeDez[numero/10-2] + " e " + unidadePorExtenso(numero%10);
 	}
 	
-	public static String centenaPorExtenso(int numero) {
+	private static String centenaPorExtenso(int numero) {
 		if(numero/100 < 1) {
 			return dezenaPorExtenso(numero%100);
 		}
@@ -42,7 +57,7 @@ public class NumeroPorExtenso {
 		return centenas[numero/100-1] + " e " + dezenaPorExtenso(numero%100);
 	}
 	
-	public static String milharPorExtenso(int numero) {
+	private static String milharPorExtenso(int numero) {
 		if(numero/1000 < 1) {
 			return centenaPorExtenso(numero);
 		}
@@ -58,40 +73,21 @@ public class NumeroPorExtenso {
 			centenaPorExtenso(numero/1000) + " mil " + centenaPorExtenso(numero%1000);
 	}
 	
-	public static String milhoesPorExtenso(int numero) {
+	private static String milhoesPorExtenso(int numero) {
 		if(numero/1000000 < 1) {
 			return milharPorExtenso(numero);
 		}
 		else if(numero % 1000000 == 0) {
-			return centenaPorExtenso(numero/1000000).equals("um") ? "um milhÃ£o" : centenaPorExtenso(numero/1000000) 
-					+ " milhÃµes";
+			return centenaPorExtenso(numero/1000000).equals("um") ? "um milhão" : centenaPorExtenso(numero/1000000) 
+					+ " milhões";
 		}
-		else if(numero % 100 == 0 || ((numero % 1000)/100) == 0) {
-			return centenaPorExtenso(numero/1000).equals("um") ? "mil e " + centenaPorExtenso(numero%1000) : 
-				centenaPorExtenso(numero/1000) + " mil e " + centenaPorExtenso(numero%1000);
+		else if(numero % 1000 == 0 || ((numero % 1000000)/1000 == 0 && numero%1000 != 0)) {
+			return centenaPorExtenso(numero/1000000).equals("um") ? "um milhão e " + milharPorExtenso(numero%1000000)
+					: centenaPorExtenso(numero/1000000) + " milhões e " + milharPorExtenso(numero%1000000);
 		}
-		return centenaPorExtenso(numero/1000).equals("um") ? "mil " + centenaPorExtenso(numero%1000) : 
-			centenaPorExtenso(numero/1000) + " mil " + centenaPorExtenso(numero%1000);
-	}
-	
-	public static boolean ehUmNumeroNatural(String numero) {
-		for(char caractere : numero.toCharArray()) {
-			if(caractere < '0' || caractere > '9') {
-				return false;
-			}
-		}
-		return true;
-	}
-	
-	public static String versaoEmPortugues(String numero) throws Exception {
-		if(! ehUmNumeroNatural(numero)) {
-			throw new Exception("O valor informado nao eh um numero natural.");
-		}
-		int numeroInteiro = Integer.parseInt(numero);
-		if (numeroInteiro == 0) {
-			return "zero";
-		}
-		return milhoesPorExtenso(numeroInteiro);
+		
+		return centenaPorExtenso(numero/1000000).equals("um") ? "um milhão, " + milharPorExtenso(numero%1000000)
+				: centenaPorExtenso(numero/1000000) + " milhões, " + milharPorExtenso(numero%1000000);
 	}
 
 }
