@@ -7,7 +7,6 @@ import play.data.validation.Constraints.*;
 
 import javax.persistence.*;
 
-@SuppressWarnings("serial")
 @Entity
 public class Task extends Model {
 
@@ -16,6 +15,11 @@ public class Task extends Model {
   
   @Required
   private String label;
+  
+  @Required
+  private int prioridade;
+  
+  private String projetoAssociado;
   
   public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
   
@@ -36,7 +40,23 @@ public class Task extends Model {
   }
   
   public String getLabel() {
-	return label;
+	  return label;
+  }
+  
+  public void setPrioridade(int prioridade) {
+	  this.prioridade = prioridade;
+  }
+  
+  public int getPrioridade() {
+	  return prioridade;
+  }
+  
+  public void setProjetoAssociado(String projetoAssociado) {
+	  this.projetoAssociado = projetoAssociado;
+  }
+  
+  public String getProjetoAssociado() {
+	  return projetoAssociado;
   }
     
 }
