@@ -12,13 +12,19 @@
     
     <ul>
         @for(task <- tasks) {
-            <li>
-                @task.getLabel()
-                
+			<br>
+				<li>
+					Prioridade: @task.getPrioridade()
+                <li>
+					Nome: @task.getLabel()
+                <li>
+					Projeto associado: <A HREF="https://github.com"> @task.getProjetoAssociado </A>
+					
                 @form(routes.Application.deleteTask(task.id)) {
                     <input type="submit" value="Remover">
                 }
-            </li>
+				</li>
+            </br>
         }
     </ul>
     
@@ -26,9 +32,13 @@
     
     @form(routes.Application.newTask()) {
         
-        @inputText(taskForm("label"), '_label -> "Nome:")
+        @inputText(taskForm("label"), '_label -> "Dê um nome para a nova tarefa:")
         
-        <input type="submit" value="Criar">
+        @inputText(taskForm("prioridade"), '_label -> "Digite a prioridade:")
+        
+        @inputText(taskForm("projetoAssociado"), '_label -> "Nome do projeto associado (se houver):")
+        
+        <input type="submit" value="Submeter">
         
     }
     
