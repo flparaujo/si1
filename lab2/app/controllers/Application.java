@@ -16,13 +16,13 @@ public class Application extends Controller {
     }
     
     public static Result tasks() {
-		return ok(views.html.index.render(Task.all(), taskForm));
+		return ok(views.html.index.render(Task.all("prioridade"), taskForm));
     }
     
     public static Result newTask() {
 		Form<Task> filledForm = taskForm.bindFromRequest();
 		if(filledForm.hasErrors()) {
-			return badRequest(views.html.index.render(Task.all(), filledForm));
+			return badRequest(views.html.index.render(Task.all("prioridade"), filledForm));
 		} 
 		else {
 			Task.create(filledForm.get());
@@ -34,5 +34,10 @@ public class Application extends Controller {
 		Task.delete(id);
 		return redirect(routes.Application.tasks());
     }
+    
+    public static Result finishTask(Long id) {
+		Task.find.ref(id).finish(true);
+		return redirect(routes.Application.tasks());
+	}
 
 }
