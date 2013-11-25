@@ -1,4 +1,4 @@
-name := "todolist"
+name := "lab2"
 
 version := "1.0-SNAPSHOT"
 
