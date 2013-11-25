@@ -21,10 +21,12 @@ public class Task extends Model {
   
   private String projetoAssociado;
   
+  private boolean finished;
+  
   public static Finder<Long,Task> find = new Finder(Long.class, Task.class);
   
-  public static List<Task> all() {
-	  return find.all();
+  public static List<Task> all(String prioridade) {
+	  return find.orderBy(prioridade).findList();
   }
   
   public static void create(Task task) {
@@ -41,6 +43,15 @@ public class Task extends Model {
   
   public String getLabel() {
 	  return label;
+  }
+  
+  public void finish(boolean finished) {
+	  this.finished = finished;
+	  update();
+  }
+  
+  public boolean isFinished() {
+	  return finished;
   }
   
   public void setPrioridade(int prioridade) {
